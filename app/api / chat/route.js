@@ -12,7 +12,9 @@ const systemPromt  = `You are an AI customer support bot designed to provide hel
 
 
 export async function POST(req){
-    const openai = new OpenAI();
+    const openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+    });
     const data = await req.json();
 
     const completion = await openai.chat.completions.create({
