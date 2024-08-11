@@ -36,7 +36,7 @@ export default function Home() {
         const text = decoder.decode(value || new Int8Array(), {stream:true})
         setMessages((messages) => {
           let lastMessage = messages[messages.length - 1]
-          let otherMessages = message.slice(0, messages.length - 1) 
+          let otherMessages = messages.slice(0, messages.length - 1) 
           return([
             ...otherMessages,
             {
@@ -50,9 +50,15 @@ export default function Home() {
     })
     const reponse = "test"
   }
+  const spotifyGreen = '#1DB954';
+  const spotifyDark = '#191414';
+  const spotifyLight = '#7d7f7c';
+  const borderColor = '#1DB954';
+  const focusedTextColor = "#1DB954";
 
   return (
     <Box
+      bgcolor={spotifyDark}
       width="100vw"
       height="100vh"
       display="flex"
@@ -61,55 +67,86 @@ export default function Home() {
       alignItems="center"
     >
       <Stack
-      direction="column"
-      width="600px"
-      height="700px"
-      border="1px solid black"
-      p={2}
-      spacing={3}
+        direction="column"
+        width="600px"
+        height="700px"
+        p={2}
+        spacing={3}
       >
-        <Stack 
+        <Stack
           direction="column"
           spacing={2}
           flexGrow={1}
           overflow="auto"
-          // maxHeight="100px"
         >
-          {
-            messages.map((message, index) => (
-              <Box 
-                key={index}
-                display="flex"
-                justifyContent={
-                  message.role === 'assistant' ? 'flex-start' : 'flex-end'
-                }
+          {messages.map((msg, index) => (
+            <Box
+              key={index}
+              display="flex"
+              justifyContent={msg.role === 'assistant' ? 'flex-start' : 'flex-end'}
+            >
+              <Box
+                bgcolor={msg.role === 'assistant' ? spotifyGreen : spotifyLight}
+                color="black"
+                borderRadius={16}
+                p={3}
+                // maxWidth="75%"
+                
               >
-                <Box
-                  bgcolor={
-                    message.role === 'assistant'
-                    ? 'primary.main'
-                    : '#CECECE'
-                  }
-                  color="white"
-                  borderRadius={16}
-                  p={3}
-                >
-                  {message.content}
-                </Box>
+                {msg.content}
               </Box>
-            ))}
+            </Box>
+          ))}
         </Stack>
         <Stack direction="row" spacing={2}>
           <TextField
-            label="message"
+            label="Type a message..."
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            variant="outlined"
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '50px',
+                '& fieldset': {
+                  borderColor: borderColor,
+                },
+                '&:hover fieldset': {
+                  borderColor: borderColor,
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: borderColor,
+                },
+                '&.Mui-focused input': {
+                  color: 'white',
+                },
+                
+              },
+              '& .MuiInputLabel-root': {
+                color: spotifyLight,
+                '&.Mui-focused': {
+                  color: spotifyLight, 
+                },
+              },
+              '& .MuiInputBase-input': {
+                color: 'white',
+              },
+            }}
           />
-          <Button 
+          <Button
             variant="contained"
             onClick={sendMessage}
-          >Send</Button>
+            style={{ 
+              backgroundColor: spotifyGreen, 
+              color: 'black', 
+              borderRadius: '50px', 
+              height: '56px', 
+              padding: '0 20px', 
+              paddingrRight: '25px',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+            }}          >
+            Send
+          </Button>
         </Stack>
       </Stack>
     </Box>
