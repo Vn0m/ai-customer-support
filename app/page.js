@@ -1,4 +1,5 @@
 'use client'
+
 import Login from "./components/Login";
 import { Box } from "@mui/material";
 
