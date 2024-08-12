@@ -8,7 +8,7 @@ const inter = Inter({
 })
 
 export const metadata = {
-  title: "Sbotify AI Helper",
+  title: "Spotify AI Helper",
   description: "AI chatbot used for supporting Spotify customers",
 };
 
