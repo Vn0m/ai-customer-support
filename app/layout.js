@@ -1,11 +1,15 @@
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google'
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata = {
-  title: "Ai customer support",
-  description: "Chat bot for helping customers",
+  title: "Spotify AI Helper",
+  description: "AI chatbot used for supporting Spotify customers",
 };
 
 export default function RootLayout({ children }) {
